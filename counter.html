@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Counter</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const container = document.getElementById('root')
+        const root = ReactDOM.createRoot(container)
+
+        function Header() {
+          return (<h1>Counter</h1>)
+        }
+
+        function Teks({angka}){
+            return (<p>{angka}</p>)
+        }
+
+        
+
+        function HomePage() {
+            const [angka, setAngka] = React.useState(0)
+
+            function Button(props){
+                return (<button onClick={() => handleClick(props.value)}>{props.value}</button>)
+            }
+
+            function handleClick(args) { 
+                if(args === "+"){
+                    if(angka < 9)
+                    {
+                        setAngka(angka + 1)
+                    }
+                    else
+                    {
+                        setAngka("done!")
+                    }
+                }
+                else if(args === "-"){
+                    if(angka > 0)
+                    {
+                        setAngka(angka - 1)
+                    }
+                }
+                else {
+                    setAngka(0)
+                }
+            }
+            return (
+                <>
+                    <Header />
+                    <Button value="+"/>
+                    <Teks angka={angka} />
+                    <Button value="-" />
+                    <Button value="Reset" disabled="disabled"/>
+                </>
+            )
+        }
+
+        root.render(<HomePage />);
+</script>
+  </body>
+</html>
